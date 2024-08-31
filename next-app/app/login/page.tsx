@@ -29,9 +29,7 @@ const loginPage = () => {
         password
       );
       const user = userCredential.user;
-      console.log("checking user", user.uid);
       if (user.emailVerified) {
-        console.log("inside if user.emailverified condition");
         router.push("/dashboard");
         const registrationData = localStorage.getItem("registration");
         const {
@@ -41,7 +39,6 @@ const loginPage = () => {
         } = registrationData ? JSON.parse(registrationData) : {};
 
         const userDoc = await getDoc(doc(firestore, "users", user.uid));
-        console.log("checking userDoc", userDoc);
 
         if (!userDoc.exists()) {
           await setDoc(doc(firestore, "users", user.uid), {
@@ -71,9 +68,6 @@ const loginPage = () => {
 
   return (
     <Box sx={{ textAlign: "center", mt: 4 }}>
-      <Typography variant="h4" component="h2" gutterBottom>
-        Saima Khan
-      </Typography>
       <Box
         component="form"
         onSubmit={handleLogin}
@@ -84,7 +78,7 @@ const loginPage = () => {
           width: "100%",
           maxWidth: 400,
           mx: "auto",
-          mt: 4,
+          mt: 12,
         }}
       >
         <TextField

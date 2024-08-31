@@ -18,9 +18,8 @@ import {
   Box,
 } from "@mui/material";
 import { doc, setDoc } from "firebase/firestore";
-import { addDoc, collection } from "firebase/firestore";
 
-export default function RegisterPage() {
+const RegisterPage = () => {
   const [firstname, setFirstname] = useState<string>("");
   const [lastname, setLastname] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -49,7 +48,6 @@ export default function RegisterPage() {
         password
       );
       const user = userCredential.user;
-      console.log("user", user);
       await sendEmailVerification(user);
 
       await setDoc(doc(firestore, "users", user.uid), {
@@ -74,7 +72,6 @@ export default function RegisterPage() {
       setPassword("");
       setConfirmPassword("");
     } catch (error) {
-      console.error("Error during registration:", error);
       if (error instanceof Error) {
         setError(error.message);
       }
@@ -169,4 +166,6 @@ export default function RegisterPage() {
       </Button>
     </Box>
   );
-}
+};
+
+export default RegisterPage;

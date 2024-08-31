@@ -44,7 +44,6 @@ const HomePage = () => {
       setLoading(false);
     });
 
-    // Cleanup subscription on component unmount
     return () => unsubscribe();
   }, [router]);
 
